@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# Note: Should be excutable to run
+
+bspc monitor -d I II III IV V
+
+bspc config border_width         3
+bspc config window_gap           8
+
+bspc config split_ratio          0.6
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config single_monocle       false
+bspc config history_aware_focus  true
+
+# Colors
+bspc config active_border_color     \#d79921
+bspc config focused_border_color   \#d79921
+bspc nfig normal_border_color     \#363836
+
+# Rules
+bspc rule -a mpv state=floating
+bspc rule -a "*:htop:*" state=floating
+bspc rule -a "*:quick:*" state=floating

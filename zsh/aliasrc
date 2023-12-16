@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# List files
+alias ls="exa -a --group-directories-first"
+alias ll="exa -la --git --git-ignore --group-directories-first"
+alias tree="exa -T -L 2 --git-ignore --group-directories-first"
+
+# Configure date
+alias date="date +'%a %b %d %H:%M:%S %Z'"
+
+# Executables
+alias vi="nvim"
+alias cat="bat"
+alias rename="perl-rename"
+
+# Package managment
+alias pkg.query="xbps-query -Rs"
+alias pkg.install="doas xbps-install -S"
+alias pkg.update="doas xbps-install -Su xbps; doas xbps-install -u"
+alias pkg.remove="doas xbps-remove -ROov"
