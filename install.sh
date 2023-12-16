@@ -4,6 +4,7 @@ PKG_CORE=(
 	xorg-minimal xauth
 	mesa-dri vulkan-loader mesa-vulkan-intel intel-video-accel
 	xf86-video-intel xf86-input-libinput
+	intel-ucode
 	pipewire bluez libspa-bluetooth
 	acpi tlp
 	dbus chrony elogind
@@ -27,7 +28,7 @@ PKG_FONT=(
 )
 
 PKG_UTILS=(
-	exa ripgrep fd fzf bat tmux
+	exa ripgrep fd fzf bat tmux neovim
 	htop lf pfetch
 	maim xclip ffmpeg 
 	redshift xbacklight
@@ -44,12 +45,12 @@ PKG_MISC=(
 	ntfs-3g
 )
 
+sudo xbps-install -Sy void-repo-nonfree
 sudo xbps-install -Sy $PKG_CORE $PKG_WM $PKG_FONT $PKG_FONT $PKG_UTILS $PKG_MISC
-sudo xbps-install -Sy intel-ucode
 
 # Create folder structure
 pushd ~
-mkdir -p dev docs media/{shots,vids,wallpapers} src temp .config .cache
+mkdir -p dev docs media/{shots,vids,wallpapers} src tmp .config .cache
 popd
 
 # Configure shell
@@ -65,13 +66,14 @@ sudo ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pip
 
 # Link configs
 ln -s ~/sys/bin ~
+chmod +x ~/sys/bin/*
 ln -s ~/sys/{bspwm,sxhkd,alacritty,rofi,bat,lf,picom,tmux,zsh} ~/.config
 chmod +x ~/sys/bspwm/bspwmrc
 ln -s ~/sys/x11/xinitrc ~/.xinitrc
 ln -s ~/sys/zsh/zshenv ~/.zshenv
 
 # Enable services
-sudo ln -s /etc/sv/{dbus,chronyd,tlp,bluetoothd,wpa_supplicant} /var/service
+sudo ln -s /etc/sv/{dbus,chronyd,tlp,bluetoothd,sshd} /var/service
 
 # Install nerd fonts
 nerd_fonts() {
