@@ -1,5 +1,3 @@
-# General mapings #
-
 # Launch terminal
 super + Return
     $TERMINAL
@@ -8,22 +6,16 @@ super + Return
 super + shift + Return
     $TERMINAL --class "quick"
 
-# launch text editor
-super + v
-    $TERMINAL -e nvim
-
 # Program launcher
 super + d
     rofi -show drun
-
-# Custom mapings #
 
 # Quick web search
 super + q
     $HOME/bin/quick-search.sh
 
 # Change wallpaper
-super + F9
+super + Delete
     $HOME/bin/wallpaper.sh
 
 # Monitor setup
@@ -31,15 +23,15 @@ super + o
     $HOME/bin/monitor.sh
 
 # Full screenshot
-Print
+ctrl + Print
     maim $HOME/media/shots/$(date +%s).png
 
 # Window screenshot
-ctrl + Print
+alt + Print
     maim -i $(xdotool getactivewindow) $HOME/media/shots/$(date +%s).png
 
 # Selection screenshot
-alt + Print
+Print
     maim -s | xclip -selection clipboard -t image/png
 
 # Power menu
@@ -51,10 +43,8 @@ super + period
     $HOME/bin/mount.sh
 
 # htop monitor
-super + shift + F9
+super + apostrophe
     $TERMINAL --class "htop" -o font.size=9 -e htop -u $USER
-
-# Function keys #
 
 # Raise volume
 {XF86AudioRaiseVolume, super + equal}
@@ -81,7 +71,6 @@ XF86MonBrightnessDown
     xbacklight - 10
 
 # bspwm #
-
 # quit/restart bspwm
 super + alt + {q,r}
     bspc {quit,wm -r}
@@ -154,12 +143,10 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
     bspc node -v {-20 0,0 20,0 -20,20 0}
 
-# Reload #
-
 # Restart bspwm
-super + F12
+super + r
     bspc wm -r
 
 # Restart sxhkd
-super + F11
+super + shift + r
     pkill -USR1 -x sxhkd
