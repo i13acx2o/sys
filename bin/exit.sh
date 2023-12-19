@@ -1,23 +1,30 @@
-#!/bin/sh
+#!/bin/zsh
 
 # List the options
-options="Shutdown\nReboot\nHibernate\nSuspend\nLock\nExit"
-choice=$(echo $options | rofi -dmenu -i -p "$(hostname)")
+menu=("Shutdown\nReboot\nHibernate\nSuspend\nLock\nExit")
+choice=$(echo $menu | rofi -dmenu -i -p "$(hostname)")
 
 # Execution
-case "$choice" in
+case $choice in
     "Shutdown")
-        doas poweroff ;;
+        doas poweroff
+	;;
     "Reboot")
-        doas reboot ;;
+        doas reboot
+	;;
     "Hibernate")
-        doas ZZZ ;;
+        doas ZZZ
+	;;
     "Suspend")
-        doas zzz ;;
+        doas zzz
+	;;
     "Lock")
-        exit 1;;
+        exit 1
+	;;
     "Exit")
-        pkill bspwm ;;
+        pkill bspwm
+	;;
     *)
-	exit 1 ;;
+	exit 1
+	;;
 esac

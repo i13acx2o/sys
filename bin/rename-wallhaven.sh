@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Directory where your files are stored
 FILES_DIR="$HOME/media/wallpapers"

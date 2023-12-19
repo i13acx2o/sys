@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 uid=$(id -u)
 gid=$(id -g)

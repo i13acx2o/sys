@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 # Directory where your wallpapers are stored
 WALLPAPER_DIR="$HOME/media/wallpapers"

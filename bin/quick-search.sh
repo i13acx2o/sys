@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 # Get input from rofi
 search_term=$(echo "" | rofi -dmenu -p "" -config ~/.config/rofi/simple.rasi)
