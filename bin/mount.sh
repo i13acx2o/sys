@@ -10,7 +10,7 @@ then
     selected=$( \
         lsblk -rno size,name,mountpoint $usbdev | \
         awk '{printf "%s%8s%12s\n", $2, $1, $3}' | \
-        dmenu -l 5 -i -p "USB Drives: " | awk '{print $1}' \
+        rofi -dmenu -l 5 -i -p "USB Drives: " | awk '{print $1}' \
     )
 
     if grep -qs $selected /proc/mounts

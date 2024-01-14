@@ -1,12 +1,12 @@
-/* Gruvbox colors */
+/* Catppuccin colors */
 
 * {
-    background:     #282828FF;
-    background-alt: #353535FF;
-    foreground:     #EBDBB2FF;
-    selected:       #83A598FF;
-    active:         #B8BB26FF;
-    urgent:         #FB4934FF;
+    background:     #1e1e2e;
+    background-alt: #1e1e2e;
+    foreground:     #cdd6f4;
+    selected:       #6c7086;
+    active:         #f38ba8;
+    urgent:         #89b4fa;
 }
 
 * {

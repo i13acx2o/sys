@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 # List files
 alias ls="exa -a --group-directories-first"
@@ -12,6 +12,12 @@ alias date="date +'%a %b %d %H:%M:%S %Z'"
 alias vi="nvim"
 alias cat="bat"
 alias rename="perl-rename"
+
+# Volume and mic notifys
+snk=$(wpctl get-volume @DEFAULT_SINK@ | awk -F ': ' '{print $2}')
+src=$(wpctl get-volume @DEFAULT_SOURCE@ | awk -F ': ' '{print $2}')
+alias val.snk="echo $snk"
+alias val.src="echo $src"
 
 # Package managment
 alias pkg.query="xbps-query -Rs"

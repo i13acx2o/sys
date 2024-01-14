@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 # Configure keyboard layouts
 setxkbmap -layout us,ara -variant ,digits grp:menu_toggle caps:escape &
@@ -8,9 +8,6 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 
 # Initialize pipewire
 pipewire &
-
-# Mirror screen
-xrandr --output DP-2 --mode 1920x1080 --output eDP-1 --mode 1920x1080 --same-as DP-2 &
 
 # Compositor
 picom &

@@ -1,10 +1,11 @@
+# Keymaps
 # Launch terminal
 super + Return
     $TERMINAL
 
 # Launch a floating terminal
 super + shift + Return
-    $TERMINAL --class "quick"
+    $TERMINAL --class "float"
 
 # Program launcher
 super + d
@@ -38,43 +39,60 @@ Print
 super + p
     $HOME/bin/exit.sh
 
-# Mount prompet
+# Mount prompt
 super + period
     $HOME/bin/mount.sh
 
 # htop monitor
 super + apostrophe
-    $TERMINAL --class "htop" -o font.size=9 -e htop -u $USER
+    $TERMINAL --class "float" -o font.size=9 -e htop -u $USER
+
+# Launch bluetoothctl
+super + c
+    $HOME/bin/blt-connect.sh
+    # $TERMINAL --class "float" -e bluetoothctl
+
+# Connect bluetooth devices
+super + shift + c
+    $HOME/bin/blt-connect.sh
+
+# Launch bluetoothctl
+super + e
+    $TERMINAL --class "float" -e lf
 
 # Raise volume
 {XF86AudioRaiseVolume, super + equal}
-    wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+    wpctl set-volume -l 1.5 @DEFAULT_SINK@ 5%+ && $HOME/bin/notify.sh "sink_value"
 
 # Lower volume
 {XF86AudioLowerVolume, super + minus}
-    wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+    wpctl set-volume @DEFAULT_SINK@ 5%- && $HOME/bin/notify.sh "sink_value"
 
 # Mute audio
 {XF86AudioMute, super + 0}
-    wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+    wpctl set-mute @DEFAULT_SINK@ toggle && $HOME/bin/notify.sh "sink_value"
+
+# Raise mic
+{super + alt + equal}
+    wpctl set-volume -l 1.5 @DEFAULT_SOURCE@ 5%+ && $HOME/bin/notify.sh "source_value"
+
+# Lower mic
+{super + alt + minus}
+    wpctl set-volume @DEFAULT_SOURCE@ 5%- && $HOME/bin/notify.sh "source_value"
 
 # Mute mic
-{XF86AudioMicMute, super + z}
-    wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+{XF86AudioMicMute, super + alt + 0}
+    wpctl set-mute @DEFAULT_SOURCE@ toggle && $HOME/bin/notify.sh "source_value"
 
 # Brightness up
-XF86MonBrightnessUp
-    xbacklight + 10
+{XF86MonBrightnessUp, super + greater}
+    xbacklight +10 && $HOME/bin/notify.sh "brightness"
 
 # Brightness down
-XF86MonBrightnessDown
-    xbacklight - 10
+{XF86MonBrightnessDown, super + less}
+    xbacklight -10 && $HOME/bin/notify.sh "brightness"
 
 # bspwm #
-# quit/restart bspwm
-super + alt + {q,r}
-    bspc {quit,wm -r}
-
 # close and kill
 super + {_,shift + }w
     bspc node -{c,k}
@@ -83,17 +101,9 @@ super + {_,shift + }w
 super + m
     bspc desktop -l next
 
-# send the newest marked node to the newest preselected node
-super + y
-    bspc node newest.marked.local -n newest.!automatic.local
-
-# swap the current node and the biggest window
-super + g
-    bspc node -s biggest.window
-
 # set the window state
-super + {t,shift + t,s,f}
-    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+super + {t,f}
+    bspc node -t {tiled,floating}
 
 # set the node flags
 super + ctrl + {m,x,s,z}
@@ -145,7 +155,7 @@ super + {Left,Down,Up,Right}
 
 # Restart bspwm
 super + r
-    bspc wm -r
+    bspc wm -r && pkill -USR1 -x sxhkd
 
 # Restart sxhkd
 super + shift + r
